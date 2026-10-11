@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- viewport-fit=cover: use the full screen incl. notch -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#110d09" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent" />
+    <title>Liar's Bar – Tools</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg" aria-hidden="true">
+      <span class="blob b1"></span>
+      <span class="blob b2"></span>
+      <span class="blob b3"></span>
+      <span class="blob b4"></span>
+      <span class="blob b5"></span>
+      <span class="blob b6"></span>
+    </div>
+
+    <!-- Muzzle flash overlay (triggered on BANG!) -->
+    <div class="flash" id="flash" aria-hidden="true"></div>
+
+    <header class="top">
+      <!-- Logo -->
+      <h1 class="logo" id="logo">
+        <img class="logo-img" id="logoImg" alt="Liar's Bar" draggable="false" />
+      </h1>
+
+      <nav class="tabs" role="tablist" data-i18n-aria="nav.aria">
+        <button
+          class="tab"
+          id="tabCards"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="cardsPanel"
+          data-i18n="nav.cards"></button>
+        <button
+          class="tab"
+          id="tabRoulette"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="roulettePanel"
+          tabindex="-1"
+          data-i18n="nav.roulette"></button>
+      </nav>
+
+      <div class="controls">
+        <!-- Language toggle (default: English) -->
+        <div class="seg" role="group" data-i18n-aria="lang.aria">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="de" aria-pressed="false">DE</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="tools">
+      <!-- ============ Section 1: card type ============ -->
+      <section
+        class="panel"
+        id="cardsPanel"
+        role="tabpanel"
+        aria-labelledby="tabCards">
+        <h2 data-i18n="cards.title"></h2>
+
+        <!-- Flip card: back and front face -->
+        <div class="card-stage">
+          <div class="card" id="card">
+            <div class="card-inner" id="cardInner">
+              <div class="card-face card-back" id="card-back">
+                <img class="face-img" id="backImg" alt="" draggable="false" />
+              </div>
+              <div class="card-face card-front" id="card-front">
+                <img class="face-img" id="frontImg" alt="" draggable="false" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="sr-only" id="cardLive" aria-live="polite"></p>
+
+        <button
+          class="btn btn-primary"
+          id="drawBtn"
+          type="button"
+          data-i18n="cards.draw"></button>
+      </section>
+
+      <!-- ============ Section 2: russian roulette ============ -->
+      <section
+        class="panel"
+        id="roulettePanel"
+        role="tabpanel"
+        aria-labelledby="tabRoulette"
+        hidden>
+        <!-- Revolver -->
+        <div class="revolver" id="revolver">
+          <div class="cylinder" id="cylinder">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <!-- Brass gradient for the cylinder body -->
+                <radialGradient id="metal" cx="50%" cy="45%" r="60%">
+                  <stop offset="0%" stop-color="#4d412a" />
+                  <stop offset="100%" stop-color="#1a140c" />
+                </radialGradient>
+                <!-- Cut-outs along the rim (cylinder flutes) -->
+                <mask id="flutes">
+                  <rect width="200" height="200" fill="#fff" />
+                  <circle cx="148" cy="16.9" r="11" fill="#000" />
+                  <circle cx="196" cy="100" r="11" fill="#000" />
+                  <circle cx="148" cy="183.1" r="11" fill="#000" />
+                  <circle cx="52" cy="183.1" r="11" fill="#000" />
+                  <circle cx="4" cy="100" r="11" fill="#000" />
+                  <circle cx="52" cy="16.9" r="11" fill="#000" />
+                </mask>
+              </defs>
+              <!-- Cylinder body -->
+              <g mask="url(#flutes)">
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="97"
+                  fill="url(#metal)"
+                  stroke="#c9a84e"
+                  stroke-opacity=".7"
+                  stroke-width="2.5" />
+              </g>
+              <!-- Engraved ring -->
+              <circle
+                cx="100"
+                cy="100"
+                r="82"
+                fill="none"
+                stroke="#f0d78c"
+                stroke-opacity=".18"
+                stroke-width="1.5"
+                stroke-dasharray="3 5" />
+              <!-- 6 chambers -->
+              <circle class="hole" cx="100" cy="42" r="22" />
+              <circle class="hole" cx="150.23" cy="71" r="22" />
+              <circle class="hole" cx="150.23" cy="129" r="22" />
+              <circle class="hole" cx="100" cy="158" r="22" />
+              <circle class="hole" cx="49.77" cy="129" r="22" />
+              <circle class="hole" cx="49.77" cy="71" r="22" />
+              <!-- Center axis -->
+              <circle
+                cx="100"
+                cy="100"
+                r="15"
+                fill="#0e0a06"
+                stroke="#f0d78c"
+                stroke-opacity=".7"
+                stroke-width="2" />
+            </svg>
+          </div>
+          <!-- Fixed sight: marks the chamber that fires -->
+          <svg class="sight" viewBox="0 0 200 200" aria-hidden="true">
+            <circle
+              cx="100"
+              cy="42"
+              r="28"
+              fill="none"
+              stroke="#f0d78c"
+              stroke-width="2.5" />
+            <path d="M92 -6 L108 -6 L100 8 Z" fill="#f0d78c" />
+          </svg>
+        </div>
+
+        <!-- CLICK / BANG!  -->
+        <div class="status" id="status" data-state="idle" aria-live="assertive">
+          <span class="status-text" id="statusText"></span>
+        </div>
+        <p class="hint" id="statusHint"></p>
+
+        <!-- Chamber counter -->
+        <div class="counter" data-i18n-aria="roulette.counter.aria">
+          <span class="counter-num" id="counterNum">0 / 6</span>
+        </div>
+
+        <div class="actions">
+          <button
+            class="btn btn-danger"
+            id="triggerBtn"
+            type="button"
+            data-i18n="roulette.trigger"></button>
+          <button
+            class="btn btn-ghost"
+            id="reloadBtn"
+            type="button"
+            data-i18n="roulette.reload"></button>
+        </div>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
