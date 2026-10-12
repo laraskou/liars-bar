@@ -70,7 +70,7 @@
       if (saved && I18N.strings[saved]) lang = saved;
     } catch (e) {}
 
-    /** Returns the text for a key in the current language (English as fallback). */
+    /** Writes all texts into the DOM and notifies listeners. */
     function t(key) {
       const current = I18N.strings[lang];
       if (key in current) return current[key];
@@ -133,6 +133,7 @@
     };
   }
   const Sound = {
+    reveal: createSound(CONFIG.sounds.reveal),
     click: createSound(CONFIG.sounds.click),
     bang: createSound(CONFIG.sounds.bang),
   };
@@ -208,6 +209,7 @@
       current = CARD_TYPES[randomInt(CARD_TYPES.length)];
       frontImg.src = frontPaths[current];
       renderLabel(true);
+      Sound.reveal();
 
       // Cancel running animations so a new draw restarts cleanly
       inner.getAnimations().forEach((a) => a.cancel());

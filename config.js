@@ -4,6 +4,7 @@ window.LIARS_BAR_CONFIG = {
 
   /* --------- Sounds -------- */
   sounds: {
+    reveal: "assets/sounds/reveal.mp3",
     click: "assets/sounds/click.mp3",
     bang: "assets/sounds/bang.mp3",
   },

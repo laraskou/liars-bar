@@ -23,6 +23,6 @@ config.js    asset paths
 i18n.js      UI texts (EN / DE)
 assets/
   photos/    back.jpg, K.jpg, Q.jpg, A.jpg, logo.png
-  sounds/    click.mp3, bang.mp3
+  sounds/    reveal.mp3, click.mp3, bang.mp3
   rye-latin-400-normal.woff2
 ```
